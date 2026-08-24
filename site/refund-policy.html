@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refund Policy: GrowthSeeded</title>
+<meta name="description" content="GrowthSeeded's refund policy: a full refund within 14 days of any payment, no explanation required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,900;1,500&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- No header/nav by design, the site's default header sits above this page. -->
+<style>
+  :root{
+    --ink:#16231D;
+    --moss:#3E6C52;
+    --moss-dark:#2E5140;
+    --gold-mark:#C9962E;
+    --paper:#F7F6F1;
+    --paper-dim:#EFEDE5;
+    --grey:#7C8B80;
+    --serif:'Fraunces', serif;
+    --sans:'Inter', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; z-index:80;
+    pointer-events:none; opacity:.03; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  a{color:var(--moss-dark);}
+  svg{display:block;}
+  :focus-visible{outline:2px solid var(--moss); outline-offset:3px; border-radius:2px;}
+
+  .wrap{max-width:760px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- head ---------- */
+
+  .doc-head{padding:80px 0 44px;}
+  .doc-kicker{
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--moss-dark); margin-bottom:20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .doc-kicker::before{content:''; width:22px; height:1px; background:var(--gold-mark);}
+  .doc-head h1{
+    font-family:var(--serif); font-weight:900;
+    font-size:clamp(36px,6vw,58px); line-height:1; letter-spacing:-.02em;
+    margin-bottom:16px;
+  }
+  .doc-meta{font-family:var(--mono); font-size:12.5px; color:var(--grey);}
+
+  /* ---------- summary ---------- */
+
+  .summary{
+    padding:30px 32px; border-radius:18px;
+    background:linear-gradient(150deg, rgba(201,150,46,.09), rgba(62,108,82,.06));
+    border:1px solid rgba(201,150,46,.24);
+    margin-bottom:56px;
+  }
+  .summary h2{
+    font-family:var(--serif); font-weight:600; font-size:20px;
+    margin-bottom:16px;
+  }
+  .summary ul{list-style:none;}
+  .summary li{
+    font-size:15.5px; line-height:1.6; color:#3D473F;
+    padding:7px 0 7px 28px; position:relative;
+  }
+  .summary li::before{
+    content:''; position:absolute; left:3px; top:15px;
+    width:10px; height:5px;
+    border-left:2px solid var(--moss); border-bottom:2px solid var(--moss);
+    transform:rotate(-45deg);
+  }
+  .summary li b{color:var(--ink); font-weight:700;}
+  .summary-note{
+    font-family:var(--mono); font-size:11.5px; color:var(--grey);
+    margin-top:18px; padding-top:16px;
+    border-top:1px solid rgba(22,35,29,.09);
+  }
+
+  /* ---------- body ---------- */
+
+  .doc-body{padding-bottom:80px;}
+  .doc-body section{margin-bottom:44px;}
+  .doc-body h3{
+    font-family:var(--serif); font-weight:600; font-size:22px;
+    line-height:1.3; margin-bottom:14px;
+    display:flex; gap:14px; align-items:baseline;
+  }
+  .doc-body h3 .n{
+    font-family:var(--mono); font-size:12.5px; font-weight:400;
+    color:var(--gold-mark); flex-shrink:0;
+  }
+  .doc-body p{
+    font-size:15.5px; line-height:1.75; color:#3D473F;
+    margin-bottom:14px; padding-left:32px;
+  }
+  .doc-body p:last-child{margin-bottom:0;}
+  .doc-body b{color:var(--ink); font-weight:600;}
+  .doc-body ul{list-style:none; padding-left:32px; margin-bottom:14px;}
+  .doc-body ul li{
+    font-size:15.5px; line-height:1.7; color:#3D473F;
+    padding:5px 0 5px 20px; position:relative;
+  }
+  .doc-body ul li::before{
+    content:''; position:absolute; left:0; top:15px;
+    width:6px; height:6px; border-radius:50%; background:var(--gold-mark);
+  }
+
+  .callout{
+    margin-left:32px; padding:18px 22px;
+    background:#fff; border-radius:12px;
+    border-left:2px solid var(--moss);
+    font-size:15px; line-height:1.7; color:#3D473F;
+  }
+  .callout b{color:var(--ink);}
+
+  .contact-box{
+    margin-top:56px; padding:30px 32px;
+    background:#fff; border:1px solid rgba(22,35,29,.08);
+    border-radius:18px;
+    box-shadow:0 18px 50px -28px rgba(22,35,29,.2);
+  }
+  .contact-box h3{font-family:var(--serif); font-weight:600; font-size:20px; margin-bottom:10px; padding:0; display:block;}
+  .contact-box p{font-size:15px; line-height:1.7; color:#3D473F; padding:0; margin-bottom:16px;}
+  .btn-primary{
+    font-family:var(--sans); font-weight:600; font-size:15px;
+    padding:14px 26px; background:var(--moss); color:var(--paper);
+    border:none; border-radius:100px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:background .25s var(--ease), transform .25s var(--ease);
+  }
+  .btn-primary:hover{background:var(--moss-dark); transform:translateY(-2px); color:var(--paper);}
+
+  /* ---------- footer ---------- */
+
+  .footer{
+    padding:36px 0; border-top:1px solid rgba(22,35,29,.08);
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:13px; color:var(--grey); flex-wrap:wrap; gap:14px;
+  }
+  .wordmark{font-family:var(--sans); font-size:15px; display:flex; align-items:baseline; gap:1px; text-decoration:none; color:var(--ink);}
+  .wordmark .g{font-weight:900; font-style:italic;}
+  .wordmark .s{font-weight:400; font-style:italic; color:var(--grey);}
+  .footer-links{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-links a{color:var(--grey); text-decoration:none; border-bottom:1px solid transparent; transition:.2s;}
+  .footer-links a:hover{border-color:var(--grey);}
+
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .doc-head{padding:56px 0 32px;}
+    .summary{padding:24px;}
+    .doc-body p, .doc-body ul{padding-left:0;}
+    .callout{margin-left:0;}
+    .doc-body h3{flex-direction:column; gap:4px;}
+    .footer{flex-direction:column; text-align:center;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition-duration:.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- shared site header ---------- */
+  .site-header{
+    background:var(--paper);
+    border-bottom:1px solid rgba(22,35,29,.08);
+    position:relative;
+    z-index:70;
+  }
+  .site-header-inner{
+    max-width:1140px;
+    margin:0 auto;
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .site-nav{
+    display:flex;
+    gap:28px;
+    flex:1;
+    justify-content:center;
+  }
+  .site-nav a{
+    font-family:var(--sans);
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:border-color .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .site-nav a:hover{
+    border-color:var(--gold-mark);
+    color:var(--moss-dark);
+  }
+  .site-header-cta{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:14px;
+    padding:10px 20px;
+    background:var(--moss);
+    color:var(--paper);
+    border-radius:100px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background .25s ease, transform .25s ease;
+    flex-shrink:0;
+  }
+  .site-header-cta:hover{
+    background:var(--moss-dark);
+    transform:translateY(-1px);
+    color:var(--paper);
+  }
+  @media (max-width:760px){
+    .site-nav{ display:none; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="/" class="wordmark"><span class="g">Growth</span><span class="s">Seeded</span></a>
+    <nav class="site-nav">
+      <a href="/is-this-for-you">Is this for you?</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/security">Security</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <a href="https://app.growthseeded.com" class="site-header-cta">Start now</a>
+  </div>
+</header>
+
+
+
+<div class="wrap">
+  <div class="doc-head">
+    <p class="doc-kicker">Refund Policy</p>
+    <h1>If it isn't right, you get your money back.</h1>
+    <p class="doc-meta">Last updated: August 23, 2026</p>
+  </div>
+
+  <div class="summary">
+    <h2>The short version</h2>
+    <ul>
+      <li><b>14 days, full refund, no explanation needed.</b> Email within 14 days of a payment and it gets refunded in full.</li>
+      <li><b>Cancel anytime from inside the app.</b> Two clicks, no retention call.</li>
+      <li><b>Your data is never deleted on cancellation.</b> You drop to the free tier and keep your records.</li>
+      <li><b>Annual plans get the same 14 days</b> from the date of each renewal charge.</li>
+    </ul>
+    <p class="summary-note">Everything below is the same policy stated more precisely. If the two ever seem to disagree, the detailed sections govern.</p>
+  </div>
+
+  <main class="doc-body">
+
+    <section>
+      <h3><span class="n">01</span> Who you're paying</h3>
+      <p>GrowthSeeded uses <b>Paddle.com Market Ltd</b> as its Merchant of Record. When you buy a subscription, Paddle is the seller on the transaction, handles the payment, issues your invoice, and collects any applicable VAT or sales tax.</p>
+      <p>This matters for refunds in one practical way: <b>refunds are returned through Paddle to the original payment method.</b> Neither GrowthSeeded nor Paddle can send a refund to a different card, account, or person than the one that paid.</p>
+    </section>
+
+    <section>
+      <h3><span class="n">02</span> The 14-day refund</h3>
+      <p>You may request a full refund of any subscription payment <b>within 14 days of the date that payment was taken</b>. You do not need to give a reason, and you will not be asked to complete a survey or take a call before it is processed.</p>
+      <p>This applies to:</p>
+      <ul>
+        <li>Your first payment on a monthly or annual plan</li>
+        <li>Any subsequent renewal charge, counted from that renewal date</li>
+        <li>Payments made after upgrading between plans</li>
+      </ul>
+      <div class="callout">Requesting a refund also cancels the subscription unless you say otherwise. <b>If you want a refund but wish to keep using GrowthSeeded on the free tier, say so and nothing else changes.</b></div>
+    </section>
+
+    <section>
+      <h3><span class="n">03</span> How to request one</h3>
+      <p>Email <b>support@growthseeded.com</b> from the address on the account, with the word "refund" somewhere in the message. Including the date of the payment helps but isn't required.</p>
+      <p>You'll get a reply confirming the request, normally within two business days. Once approved, Paddle typically returns the funds within <b>five to ten business days</b>, though the exact timing depends on your bank or card issuer rather than on us.</p>
+      <p>You can also request a refund directly through the Paddle receipt emailed to you at the time of purchase.</p>
+    </section>
+
+    <section>
+      <h3><span class="n">04</span> After 14 days</h3>
+      <p>Beyond the 14-day window, payments are generally non-refundable, and a cancellation stops future charges rather than reversing past ones.</p>
+      <p>That said, this is a small product run by one person, not a policy department. <b>If something genuinely went wrong</b>, an outage, a charge you didn't intend, a renewal you tried to cancel and couldn't, get in touch. Cases like those are handled on their merits rather than by the calendar.</p>
+    </section>
+
+    <section>
+      <h3><span class="n">05</span> Cancelling, which is not the same thing</h3>
+      <p>Cancelling stops the next charge. It does not refund the current period, and it does not need to: <b>you keep full access until the period you've already paid for ends.</b></p>
+      <p>After that, the account moves to the free tier. Nothing you've recorded is deleted. Your relationships, notes, history, and sequences all remain; the free tier simply limits how many of them can stay active at once. Upgrading again restores full capacity immediately.</p>
+    </section>
+
+    <section>
+      <h3><span class="n">06</span> The free tier</h3>
+      <p>The free tier involves no payment and therefore no refunds. It is not a time-limited trial, and it does not require a card. You are never automatically charged for using it.</p>
+    </section>
+
+    <section>
+      <h3><span class="n">07</span> Chargebacks</h3>
+      <p>If you believe a charge is wrong, <b>please email before disputing it with your bank</b>. A refund request is faster than a chargeback, usually by several weeks, and it costs nothing.</p>
+      <p>Accounts with an open chargeback may be suspended while it is resolved, since Paddle reverses the transaction and the associated access along with it. Contacting us first avoids this entirely.</p>
+    </section>
+
+    <section>
+      <h3><span class="n">08</span> Changes to this policy</h3>
+      <p>If this policy changes, the revised version appears on this page with a new date at the top. <b>Changes are never applied retroactively</b>: the policy in effect on the day you paid is the one that governs that payment.</p>
+    </section>
+
+    <div class="contact-box">
+      <h3>Still unsure about something?</h3>
+      <p>Ask before you buy rather than after. A question about whether GrowthSeeded fits your situation is welcome and gets an honest answer, including "probably not" where that's the truth.</p>
+      <a href="mailto:support@growthseeded.com" class="btn-primary">
+        Email support
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <a href="/" class="wordmark"><span class="g">Growth</span><span class="s">Seeded</span></a>
+    <div class="footer-links">
+      <a href="/pricing">Pricing</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <span>&copy; 2026 GrowthSeeded</span>
+  </footer>
+</div>
+
+</body>
+</html>

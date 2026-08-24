@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service: GrowthSeeded</title>
+<meta name="description" content="The terms governing your use of GrowthSeeded.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,900;1,500&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- No header/nav by design, the site's default header sits above this page. -->
+<style>
+  :root{
+    --ink:#16231D;
+    --moss:#3E6C52;
+    --moss-dark:#2E5140;
+    --gold-mark:#C9962E;
+    --clay:#B5533C;
+    --paper:#F7F6F1;
+    --paper-dim:#EFEDE5;
+    --grey:#7C8B80;
+    --serif:'Fraunces', serif;
+    --sans:'Inter', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; z-index:80;
+    pointer-events:none; opacity:.03; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  a{color:var(--moss-dark);}
+  svg{display:block;}
+  :focus-visible{outline:2px solid var(--moss); outline-offset:3px; border-radius:2px;}
+
+  .wrap{max-width:760px; margin:0 auto; padding:0 32px;}
+
+  .doc-head{padding:80px 0 44px;}
+  .doc-kicker{
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--moss-dark); margin-bottom:20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .doc-kicker::before{content:''; width:22px; height:1px; background:var(--gold-mark);}
+  .doc-head h1{
+    font-family:var(--serif); font-weight:900;
+    font-size:clamp(36px,6vw,58px); line-height:1; letter-spacing:-.02em;
+    margin-bottom:16px;
+  }
+  .doc-meta{font-family:var(--mono); font-size:12.5px; color:var(--grey);}
+
+  .summary{
+    padding:30px 32px; border-radius:18px;
+    background:linear-gradient(150deg, rgba(201,150,46,.09), rgba(62,108,82,.06));
+    border:1px solid rgba(201,150,46,.24);
+    margin-bottom:44px;
+  }
+  .summary h2{font-family:var(--serif); font-weight:600; font-size:20px; margin-bottom:16px;}
+  .summary ul{list-style:none;}
+  .summary li{
+    font-size:15.5px; line-height:1.6; color:#3D473F;
+    padding:7px 0 7px 28px; position:relative;
+  }
+  .summary li::before{
+    content:''; position:absolute; left:3px; top:15px;
+    width:10px; height:5px;
+    border-left:2px solid var(--moss); border-bottom:2px solid var(--moss);
+    transform:rotate(-45deg);
+  }
+  .summary li b{color:var(--ink); font-weight:700;}
+  .summary-note{
+    font-family:var(--mono); font-size:11.5px; color:var(--grey);
+    margin-top:18px; padding-top:16px;
+    border-top:1px solid rgba(22,35,29,.09);
+  }
+
+  /* contents */
+  .toc{
+    margin-bottom:56px; padding:24px 28px;
+    background:#fff; border:1px solid rgba(22,35,29,.07); border-radius:14px;
+  }
+  .toc h4{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--grey); margin-bottom:14px;
+  }
+  .toc ol{list-style:none; counter-reset:toc; columns:2; column-gap:28px;}
+  .toc li{counter-increment:toc; font-size:14px; padding:4px 0; break-inside:avoid;}
+  .toc li::before{
+    content:counter(toc,decimal-leading-zero); font-family:var(--mono);
+    font-size:11px; color:var(--gold-mark); margin-right:9px;
+  }
+  .toc a{text-decoration:none; color:#3D473F; border-bottom:1px solid transparent; transition:.2s;}
+  .toc a:hover{border-color:var(--gold-mark); color:var(--ink);}
+
+  .doc-body{padding-bottom:80px;}
+  .doc-body section{margin-bottom:42px; scroll-margin-top:24px;}
+  .doc-body h3{
+    font-family:var(--serif); font-weight:600; font-size:22px;
+    line-height:1.3; margin-bottom:14px;
+    display:flex; gap:14px; align-items:baseline;
+  }
+  .doc-body h3 .n{
+    font-family:var(--mono); font-size:12.5px; font-weight:400;
+    color:var(--gold-mark); flex-shrink:0;
+  }
+  .doc-body p{
+    font-size:15.5px; line-height:1.75; color:#3D473F;
+    margin-bottom:14px; padding-left:32px;
+  }
+  .doc-body p:last-child{margin-bottom:0;}
+  .doc-body b{color:var(--ink); font-weight:600;}
+  .doc-body ul{list-style:none; padding-left:32px; margin-bottom:14px;}
+  .doc-body ul li{
+    font-size:15.5px; line-height:1.7; color:#3D473F;
+    padding:5px 0 5px 20px; position:relative;
+  }
+  .doc-body ul li::before{
+    content:''; position:absolute; left:0; top:15px;
+    width:6px; height:6px; border-radius:50%; background:var(--gold-mark);
+  }
+
+  .callout{
+    margin-left:32px; padding:18px 22px;
+    background:#fff; border-radius:12px;
+    border-left:2px solid var(--moss);
+    font-size:15px; line-height:1.7; color:#3D473F;
+  }
+  .callout.warn{border-left-color:var(--clay);}
+  .callout b{color:var(--ink);}
+
+  .contact-box{
+    margin-top:56px; padding:30px 32px;
+    background:#fff; border:1px solid rgba(22,35,29,.08);
+    border-radius:18px; box-shadow:0 18px 50px -28px rgba(22,35,29,.2);
+  }
+  .contact-box h3{font-family:var(--serif); font-weight:600; font-size:20px; margin-bottom:10px; padding:0; display:block;}
+  .contact-box p{font-size:15px; line-height:1.7; color:#3D473F; padding:0; margin-bottom:16px;}
+  .btn-primary{
+    font-family:var(--sans); font-weight:600; font-size:15px;
+    padding:14px 26px; background:var(--moss); color:var(--paper);
+    border:none; border-radius:100px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:background .25s var(--ease), transform .25s var(--ease);
+  }
+  .btn-primary:hover{background:var(--moss-dark); transform:translateY(-2px); color:var(--paper);}
+
+  .footer{
+    padding:36px 0; border-top:1px solid rgba(22,35,29,.08);
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:13px; color:var(--grey); flex-wrap:wrap; gap:14px;
+  }
+  .wordmark{font-family:var(--sans); font-size:15px; display:flex; align-items:baseline; gap:1px; text-decoration:none; color:var(--ink);}
+  .wordmark .g{font-weight:900; font-style:italic;}
+  .wordmark .s{font-weight:400; font-style:italic; color:var(--grey);}
+  .footer-links{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-links a{color:var(--grey); text-decoration:none; border-bottom:1px solid transparent; transition:.2s;}
+  .footer-links a:hover{border-color:var(--grey);}
+
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .doc-head{padding:56px 0 32px;}
+    .summary{padding:24px;}
+    .toc ol{columns:1;}
+    .doc-body p, .doc-body ul{padding-left:0;}
+    .callout{margin-left:0;}
+    .doc-body h3{flex-direction:column; gap:4px;}
+    .footer{flex-direction:column; text-align:center;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition-duration:.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- shared site header ---------- */
+  .site-header{
+    background:var(--paper);
+    border-bottom:1px solid rgba(22,35,29,.08);
+    position:relative;
+    z-index:70;
+  }
+  .site-header-inner{
+    max-width:1140px;
+    margin:0 auto;
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .site-nav{
+    display:flex;
+    gap:28px;
+    flex:1;
+    justify-content:center;
+  }
+  .site-nav a{
+    font-family:var(--sans);
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:border-color .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .site-nav a:hover{
+    border-color:var(--gold-mark);
+    color:var(--moss-dark);
+  }
+  .site-header-cta{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:14px;
+    padding:10px 20px;
+    background:var(--moss);
+    color:var(--paper);
+    border-radius:100px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background .25s ease, transform .25s ease;
+    flex-shrink:0;
+  }
+  .site-header-cta:hover{
+    background:var(--moss-dark);
+    transform:translateY(-1px);
+    color:var(--paper);
+  }
+  @media (max-width:760px){
+    .site-nav{ display:none; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="/" class="wordmark"><span class="g">Growth</span><span class="s">Seeded</span></a>
+    <nav class="site-nav">
+      <a href="/is-this-for-you">Is this for you?</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/security">Security</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <a href="https://app.growthseeded.com" class="site-header-cta">Start now</a>
+  </div>
+</header>
+
+
+
+<div class="wrap">
+  <div class="doc-head">
+    <p class="doc-kicker">Terms of Service</p>
+    <h1>The agreement, in language you can actually read.</h1>
+    <p class="doc-meta">Last updated: August 23, 2026</p>
+  </div>
+
+  <div class="summary">
+    <h2>The short version</h2>
+    <ul>
+      <li><b>GrowthSeeded is a private record-keeping tool.</b> It never sends anything, never connects to LinkedIn, and never acts on your behalf.</li>
+      <li><b>Your records belong to you.</b> They are never sold, never used for advertising, and never shared with other users.</li>
+      <li><b>Don't use it for spam or scraped lists.</b> That's the one thing that gets an account closed.</li>
+      <li><b>You're responsible for your own conduct</b> on LinkedIn or anywhere else. This is a notebook, not a shield.</li>
+    </ul>
+    <p class="summary-note">This summary is for orientation only and is not part of the agreement. The numbered sections below are the binding terms.</p>
+  </div>
+
+  <nav class="toc">
+    <h4>Contents</h4>
+    <ol>
+      <li><a href="#s1">Who this agreement is with</a></li>
+      <li><a href="#s2">Eligibility</a></li>
+      <li><a href="#s3">Your account</a></li>
+      <li><a href="#s4">What GrowthSeeded is, and isn't</a></li>
+      <li><a href="#s5">No affiliation with LinkedIn</a></li>
+      <li><a href="#s6">Acceptable use</a></li>
+      <li><a href="#s7">Your data and content</a></li>
+      <li><a href="#s8">Third parties you record</a></li>
+      <li><a href="#s9">Plans, billing and renewal</a></li>
+      <li><a href="#s10">Availability and support</a></li>
+      <li><a href="#s11">Warranties</a></li>
+      <li><a href="#s12">Limitation of liability</a></li>
+      <li><a href="#s13">Suspension and termination</a></li>
+      <li><a href="#s14">Changes to the service</a></li>
+      <li><a href="#s15">Changes to these terms</a></li>
+      <li><a href="#s16">Governing law</a></li>
+    </ol>
+  </nav>
+
+  <main class="doc-body">
+
+    <section id="s1">
+      <h3><span class="n">01</span> Who this agreement is with</h3>
+      <p>GrowthSeeded is operated by an individual sole proprietor based in Dhaka, Bangladesh (referred to here as <b>"we"</b> or <b>"us"</b>). These terms form an agreement between us and you, the person using the service.</p>
+      <p>By creating an account or using GrowthSeeded, you accept these terms. If you don't accept them, please don't use the service.</p>
+      <p>Payments are processed by <b>Paddle.com Market Ltd</b> as Merchant of Record. Paddle is the seller on your transaction and has its own terms that apply to the payment itself.</p>
+    </section>
+
+    <section id="s2">
+      <h3><span class="n">02</span> Eligibility</h3>
+      <p>You must be at least <b>18 years old</b> to use GrowthSeeded. If you are using it on behalf of an organization, you confirm you have authority to accept these terms for that organization.</p>
+    </section>
+
+    <section id="s3">
+      <h3><span class="n">03</span> Your account</h3>
+      <p>You are responsible for keeping your login credentials secure and for everything that happens under your account. Please tell us promptly if you believe someone else has gained access to it.</p>
+      <p>Accounts are for a single person. You may not share one set of credentials among multiple people; additional seats exist for that purpose.</p>
+      <p>One person may not operate multiple free accounts in order to work around plan limits or to claim referral rewards more than once.</p>
+    </section>
+
+    <section id="s4">
+      <h3><span class="n">04</span> What GrowthSeeded is, and isn't</h3>
+      <p>GrowthSeeded is a <b>private tracking and reminder tool</b>. It records relationships you choose to enter, calculates when you have decided a follow-up is due, and shows you that list.</p>
+      <p>It does not, at any point:</p>
+      <ul>
+        <li>Send messages, emails, connection requests, or anything else on your behalf</li>
+        <li>Connect to, integrate with, or access any social network's API</li>
+        <li>Scrape, harvest, or import contact data from any platform</li>
+        <li>Automate any action outside of the app itself</li>
+      </ul>
+      <div class="callout">Every action GrowthSeeded describes is one <b>you</b> perform, manually, in your own words, on whatever platform you choose. The app records that it happened. It never makes it happen.</div>
+    </section>
+
+    <section id="s5">
+      <h3><span class="n">05</span> No affiliation with LinkedIn</h3>
+      <p>GrowthSeeded is <b>not affiliated with, endorsed by, sponsored by, or connected to LinkedIn Corporation</b> or Microsoft in any way. LinkedIn is a trademark of its owner and is referred to here only descriptively, to explain what people commonly use this tool alongside.</p>
+      <p>Your use of LinkedIn, or of any other platform, is governed entirely by that platform's own terms, which are between you and them. <b>You are solely responsible for complying with them.</b> Nothing in GrowthSeeded grants you any right or permission in relation to any third-party service.</p>
+    </section>
+
+    <section id="s6">
+      <h3><span class="n">06</span> Acceptable use</h3>
+      <p>GrowthSeeded exists to help people be deliberate with a manageable number of real relationships. You agree not to use it to:</p>
+      <ul>
+        <li>Organize unsolicited bulk messaging, spam, or mass outreach campaigns</li>
+        <li>Store contact data obtained by scraping, harvesting, or purchase from list vendors</li>
+        <li>Harass, stalk, threaten, or intimidate any person</li>
+        <li>Store data about anyone in a way that breaks the law where you or they are located</li>
+        <li>Attempt to access another user's account or data</li>
+        <li>Probe, overload, reverse-engineer, or interfere with the service or its infrastructure</li>
+        <li>Resell or redistribute access to the service</li>
+      </ul>
+      <div class="callout warn">Plan caps exist partly to make abuse impractical. <b>Attempting to circumvent them</b>, through multiple accounts, automated account creation, or otherwise, is a breach of these terms and grounds for closing the account without refund.</div>
+    </section>
+
+    <section id="s7">
+      <h3><span class="n">07</span> Your data and content</h3>
+      <p><b>You own everything you put into GrowthSeeded.</b> We claim no ownership of your records, notes, sequences, or any other content in your account.</p>
+      <p>We store that content solely to provide the service to you. We do not sell it, rent it, use it to train models, use it for advertising, or make it available to other users. Per-user isolation is enforced at the database level, not merely by convention.</p>
+      <p>You can export or delete your data at any time. Details of what is stored and for how long are set out in the <a href="/privacy">Privacy Policy</a>.</p>
+    </section>
+
+    <section id="s8">
+      <h3><span class="n">08</span> Third parties you record</h3>
+      <p>GrowthSeeded lets you store information about other people. Where the law treats that as personal data, <b>you are the controller of it and we are a processor acting on your instructions.</b></p>
+      <p>You are responsible for having a lawful basis to record what you record, for keeping it accurate and proportionate, and for honoring any request a person makes to you about their own data. We will assist with such requests where we reasonably can.</p>
+      <p>The Opted Out status exists precisely so that a request never to be contacted again can be recorded permanently and respected.</p>
+    </section>
+
+    <section id="s9">
+      <h3><span class="n">09</span> Plans, billing and renewal</h3>
+      <p>Current prices and plan limits are shown on the <a href="/pricing">pricing page</a>. Paid subscriptions <b>renew automatically</b> at the end of each billing period until cancelled.</p>
+      <p>You may cancel at any time from within the app. Cancellation stops future charges and takes effect at the end of the period you have already paid for; access continues until then, after which the account moves to the free tier.</p>
+      <p>Refunds are governed by the <a href="/refund-policy">Refund Policy</a>, which offers a full refund within 14 days of any payment.</p>
+      <p>We may change prices. <b>Existing subscribers get at least 30 days' notice by email before a change affects them</b>, and can cancel before it takes effect.</p>
+    </section>
+
+    <section id="s10">
+      <h3><span class="n">10</span> Availability and support</h3>
+      <p>GrowthSeeded is built and maintained by one person. We aim to keep it running reliably and to answer support email within a few business days, but <b>we do not offer a guaranteed uptime or response-time commitment</b>, and there is no service level agreement.</p>
+      <p>Planned maintenance will be announced in advance where practical. Unplanned outages will be fixed as quickly as we reasonably can.</p>
+    </section>
+
+    <section id="s11">
+      <h3><span class="n">11</span> Warranties</h3>
+      <p>The service is provided <b>"as is" and "as available"</b>. To the fullest extent permitted by law, we disclaim all implied warranties, including merchantability, fitness for a particular purpose, and non-infringement.</p>
+      <p>We do not warrant that the service will be uninterrupted or error-free, or that using it will produce any particular professional, commercial, or fundraising outcome. It is a tool for organizing your own effort, and the results depend on that effort.</p>
+      <p>Nothing here excludes any warranty or right that cannot lawfully be excluded, including statutory consumer rights that may apply where you live.</p>
+    </section>
+
+    <section id="s12">
+      <h3><span class="n">12</span> Limitation of liability</h3>
+      <p>To the fullest extent permitted by law, we are not liable for indirect, incidental, special, consequential, or punitive damages, or for lost profits, lost opportunities, lost business, or lost data.</p>
+      <p>Our total aggregate liability arising out of or relating to the service is limited to <b>the greater of the amount you paid us in the 12 months before the claim, or fifty US dollars</b>.</p>
+      <p>These limits do not apply to liability that cannot lawfully be limited, such as for death or personal injury caused by negligence, or for fraud.</p>
+    </section>
+
+    <section id="s13">
+      <h3><span class="n">13</span> Suspension and termination</h3>
+      <p>You may close your account at any time. We may suspend or close an account that breaches these terms, particularly Section 6, or where required by law.</p>
+      <p>Where a breach is inadvertent and fixable, <b>we will normally contact you first and give you a chance to put it right</b>. Immediate closure is reserved for clear, serious, or repeated abuse.</p>
+      <p>If we close your account for a reason other than your breach, we will refund any unused portion of a prepaid period.</p>
+    </section>
+
+    <section id="s14">
+      <h3><span class="n">14</span> Changes to the service</h3>
+      <p>The product will keep changing. Features may be added, altered, or removed. We will not remove a significant feature that a paid plan is materially built around without giving reasonable notice and, where the change genuinely disadvantages you, the option to cancel and receive a pro-rated refund.</p>
+    </section>
+
+    <section id="s15">
+      <h3><span class="n">15</span> Changes to these terms</h3>
+      <p>We may update these terms. The current version always appears on this page with its date at the top. For material changes, we will give notice by email or in the app before they take effect.</p>
+      <p>Continuing to use GrowthSeeded after a change takes effect means you accept the updated terms. If you do not accept them, you may cancel.</p>
+    </section>
+
+    <section id="s16">
+      <h3><span class="n">16</span> Governing law</h3>
+      <p>These terms are governed by the laws of <b>Bangladesh</b>, and the courts of Dhaka have jurisdiction over any dispute, except where mandatory law in your country of residence gives you the right to bring proceedings locally.</p>
+      <p>Nothing in these terms removes consumer protections that apply to you under the law of your own country and cannot be contracted out of.</p>
+      <p>If any provision is found unenforceable, the rest remains in force.</p>
+    </section>
+
+    <div class="contact-box">
+      <h3>Questions about any of this?</h3>
+      <p>If something here is unclear or seems unreasonable, say so. These terms are meant to be plain and fair rather than defensive, and worth fixing where they aren't.</p>
+      <a href="mailto:support@growthseeded.com" class="btn-primary">
+        Email support
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <a href="/" class="wordmark"><span class="g">Growth</span><span class="s">Seeded</span></a>
+    <div class="footer-links">
+      <a href="/pricing">Pricing</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/refund-policy">Refunds</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <span>&copy; 2026 GrowthSeeded</span>
+  </footer>
+</div>
+
+</body>
+</html>

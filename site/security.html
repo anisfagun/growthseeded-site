@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security: GrowthSeeded</title>
+<meta name="description" content="How GrowthSeeded protects your data: account isolation enforced by the database itself, no platform integrations, and an honest account of what isn't in place yet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,900;1,500&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- No header/nav by design, the site's default header sits above this page. -->
+<style>
+  :root{
+    --ink:#16231D;
+    --moss:#3E6C52;
+    --moss-dark:#2E5140;
+    --gold-mark:#C9962E;
+    --gold-bright:#E8B44A;
+    --clay:#B5533C;
+    --paper:#F7F6F1;
+    --paper-dim:#EFEDE5;
+    --grey:#7C8B80;
+    --serif:'Fraunces', serif;
+    --sans:'Inter', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.5;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; z-index:80;
+    pointer-events:none; opacity:.03; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  a{color:var(--moss-dark);}
+  svg{display:block; max-width:100%;}
+  :focus-visible{outline:2px solid var(--moss); outline-offset:3px; border-radius:2px;}
+
+  .wrap{max-width:860px; margin:0 auto; padding:0 32px;}
+  .section{padding:80px 0;}
+
+  .reveal{opacity:0; transform:translateY(20px); transition:opacity .8s var(--ease), transform .8s var(--ease);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- head ---------- */
+
+  .doc-head{padding:80px 0 44px;}
+  .doc-kicker{
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--moss-dark); margin-bottom:20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .doc-kicker::before{content:''; width:22px; height:1px; background:var(--gold-mark);}
+  .doc-head h1{
+    font-family:var(--serif); font-weight:900;
+    font-size:clamp(36px,6vw,60px); line-height:1; letter-spacing:-.02em;
+    margin-bottom:18px; max-width:720px;
+  }
+  .doc-head h1 .hl{
+    font-style:italic;
+    background:linear-gradient(100deg,var(--gold-mark),var(--gold-bright),var(--gold-mark));
+    background-size:220% 100%;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:shimmer 5.5s linear infinite;
+  }
+  @keyframes shimmer{0%{background-position:220% 0;} 100%{background-position:-20% 0;}}
+  .doc-head p{font-size:17px; color:#3D473F; max-width:560px; line-height:1.65;}
+
+  /* ---------- pillars ---------- */
+
+  .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(22,35,29,.08); border:1px solid rgba(22,35,29,.08); border-radius:18px; overflow:hidden; margin-bottom:70px;}
+  .pillar{background:var(--paper); padding:30px 26px; transition:background .3s var(--ease);}
+  .pillar:hover{background:#fff;}
+  .pillar-icon{width:28px; height:28px; color:var(--gold-mark); margin-bottom:16px;}
+  .pillar h3{font-family:var(--serif); font-weight:600; font-size:17px; margin-bottom:8px; line-height:1.3;}
+  .pillar p{font-size:13.5px; color:var(--grey); line-height:1.6;}
+
+  /* ---------- body ---------- */
+
+  .doc-body section{margin-bottom:48px; scroll-margin-top:24px;}
+  .doc-body h3{
+    font-family:var(--serif); font-weight:600; font-size:23px;
+    line-height:1.3; margin-bottom:16px;
+    display:flex; gap:14px; align-items:baseline;
+  }
+  .doc-body h3 .n{font-family:var(--mono); font-size:12.5px; font-weight:400; color:var(--gold-mark); flex-shrink:0;}
+  .doc-body p{font-size:15.5px; line-height:1.75; color:#3D473F; margin-bottom:14px; padding-left:32px;}
+  .doc-body p:last-child{margin-bottom:0;}
+  .doc-body b{color:var(--ink); font-weight:600;}
+  .doc-body ul{list-style:none; padding-left:32px; margin-bottom:14px;}
+  .doc-body ul li{font-size:15.5px; line-height:1.7; color:#3D473F; padding:5px 0 5px 20px; position:relative;}
+  .doc-body ul li::before{content:''; position:absolute; left:0; top:15px; width:6px; height:6px; border-radius:50%; background:var(--gold-mark);}
+
+  .callout{
+    margin-left:32px; padding:18px 22px;
+    background:#fff; border-radius:12px;
+    border-left:2px solid var(--moss);
+    font-size:15px; line-height:1.7; color:#3D473F;
+  }
+  .callout.warn{border-left-color:var(--clay);}
+  .callout b{color:var(--ink);}
+
+  .code{
+    margin-left:32px; margin-bottom:14px;
+    background:var(--ink); color:#D8DED9;
+    border-radius:14px; padding:22px 24px;
+    font-family:var(--mono); font-size:12.5px; line-height:1.75;
+    overflow-x:auto; white-space:pre;
+  }
+  .code .k{color:var(--gold-bright);}
+  .code .c{color:#7C8B80;}
+
+  /* ---------- honest limits ---------- */
+
+  .limits{
+    background:var(--paper-dim);
+    border:1px dashed rgba(181,83,60,.3);
+    border-radius:20px; padding:34px 38px;
+  }
+  .limits h3{font-family:var(--serif); font-weight:600; font-size:22px; margin-bottom:8px; padding:0; display:block;}
+  .limits > p{font-size:15px; color:var(--grey); padding:0; margin-bottom:20px;}
+  .limits ul{list-style:none; padding:0;}
+  .limits li{font-size:15.5px; line-height:1.65; color:#3D473F; padding:11px 0 11px 32px; position:relative;}
+  .limits li::before{content:''; position:absolute; left:4px; top:19px; width:12px; height:2px; background:var(--clay); opacity:.55;}
+  .limits li b{color:var(--ink); font-weight:600;}
+
+  /* ---------- report ---------- */
+
+  .report-box{
+    margin-top:56px; padding:30px 32px;
+    background:#fff; border:1px solid rgba(22,35,29,.08);
+    border-radius:18px; box-shadow:0 18px 50px -28px rgba(22,35,29,.2);
+  }
+  .report-box h3{font-family:var(--serif); font-weight:600; font-size:20px; margin-bottom:10px; padding:0; display:block;}
+  .report-box p{font-size:15px; line-height:1.7; color:#3D473F; padding:0; margin-bottom:16px;}
+  .btn-primary{
+    font-family:var(--sans); font-weight:600; font-size:15px;
+    padding:14px 26px; background:var(--moss); color:var(--paper);
+    border:none; border-radius:100px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:background .25s var(--ease), transform .25s var(--ease);
+  }
+  .btn-primary:hover{background:var(--moss-dark); transform:translateY(-2px); color:var(--paper);}
+
+  .footer{
+    margin-top:70px; padding:36px 0; border-top:1px solid rgba(22,35,29,.08);
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:13px; color:var(--grey); flex-wrap:wrap; gap:14px;
+  }
+  .wordmark{font-family:var(--sans); font-size:15px; display:flex; align-items:baseline; gap:1px; text-decoration:none; color:var(--ink);}
+  .wordmark .g{font-weight:900; font-style:italic;}
+  .wordmark .s{font-weight:400; font-style:italic; color:var(--grey);}
+  .footer-links{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-links a{color:var(--grey); text-decoration:none; border-bottom:1px solid transparent; transition:.2s;}
+  .footer-links a:hover{border-color:var(--grey);}
+
+  @media (max-width:760px){
+    .pillars{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .doc-head{padding:56px 0 32px;}
+    .doc-body p, .doc-body ul{padding-left:0;}
+    .callout, .code{margin-left:0;}
+    .code{font-size:11.5px; padding:18px;}
+    .limits{padding:24px;}
+    .doc-body h3{flex-direction:column; gap:4px;}
+    .footer{flex-direction:column; text-align:center;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- shared site header ---------- */
+  .site-header{
+    background:var(--paper);
+    border-bottom:1px solid rgba(22,35,29,.08);
+    position:relative;
+    z-index:70;
+  }
+  .site-header-inner{
+    max-width:1140px;
+    margin:0 auto;
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .site-nav{
+    display:flex;
+    gap:28px;
+    flex:1;
+    justify-content:center;
+  }
+  .site-nav a{
+    font-family:var(--sans);
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:border-color .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .site-nav a:hover{
+    border-color:var(--gold-mark);
+    color:var(--moss-dark);
+  }
+  .site-header-cta{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:14px;
+    padding:10px 20px;
+    background:var(--moss);
+    color:var(--paper);
+    border-radius:100px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background .25s ease, transform .25s ease;
+    flex-shrink:0;
+  }
+  .site-header-cta:hover{
+    background:var(--moss-dark);
+    transform:translateY(-1px);
+    color:var(--paper);
+  }
+  @media (max-width:760px){
+    .site-nav{ display:none; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="/" class="wordmark"><span class="g">Growth</span><span class="s">Seeded</span></a>
+    <nav class="site-nav">
+      <a href="/is-this-for-you">Is this for you?</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/security">Security</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <a href="https://app.growthseeded.com" class="site-header-cta">Start now</a>
+  </div>
+</header>
+
+
+
+<div class="wrap">
+  <div class="doc-head">
+    <p class="doc-kicker">Security</p>
+    <h1>You can <span class="hl">check this yourself.</span> You don't have to believe me.</h1>
+    <p>A page about who you know is a sensitive thing to hand someone. Here is exactly how it's protected, in terms specific enough to verify rather than vague enough to sound good.</p>
+  </div>
+
+  <div class="pillars reveal">
+    <div class="pillar">
+      <svg class="pillar-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="20" height="13" rx="2.5"/><path d="M11 14v-4a5 5 0 0110 0v4"/></svg>
+      <h3>Isolated by the database</h3>
+      <p>Not by the interface. A bug in the app cannot expose one account to another, because the rules sit a layer below it.</p>
+    </div>
+    <div class="pillar">
+      <svg class="pillar-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l11 5v8c0 7-4.7 11.6-11 13-6.3-1.4-11-6-11-13V8z"/><path d="M12 16l3 3 5-6"/></svg>
+      <h3>No platform integrations</h3>
+      <p>No API keys to any social network, no OAuth grants, no access tokens. There is no connected account to compromise.</p>
+    </div>
+    <div class="pillar">
+      <svg class="pillar-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M16 21v-6M16 11h.01"/></svg>
+      <h3>Small attack surface</h3>
+      <p>One page, one database, no backend of our own to breach. Fewer moving parts is a security property, not just a simplicity one.</p>
+    </div>
+  </div>
+
+  <main class="doc-body">
+
+    <section id="s1">
+      <h3><span class="n">01</span> Where the isolation actually lives</h3>
+      <p>Most apps keep your data separate by writing code that only asks for your rows. That works right up until a bug asks for the wrong ones.</p>
+      <p>GrowthSeeded enforces separation in the database itself. Every read and write is checked against rules that compare the requesting user's identity to the path being accessed. If they don't match, the database refuses, regardless of what the app asked for.</p>
+      <div class="code"><span class="c">// The rule protecting every account</span>
+match /accounts/{userId} {
+  allow read, write: <span class="k">if</span> request.auth != <span class="k">null</span>
+                     && request.auth.uid == userId;
+
+  match /leads/{leadId} {
+    allow read, write: <span class="k">if</span> request.auth != <span class="k">null</span>
+                       && request.auth.uid == userId;
+  }
+}</div>
+      <p>The identifier on the left is assigned by Firebase during sign-in and <b>cannot be set or forged from browser code</b>. Anything outside these two paths is denied by default; there is no catch-all rule anywhere.</p>
+    </section>
+
+    <section id="s2">
+      <h3><span class="n">02</span> The self-test inside the app</h3>
+      <p>Claims like the one above are easy to make and hard for a user to check. So the app ships with a test that checks it live.</p>
+      <p>In the Privacy and Security panel, a button attempts a <b>real database read while signed out</b> and reports whether the database refused. It isn't a simulation or a description; it exercises the actual rule against the actual database and shows you the result.</p>
+      <div class="callout">It deliberately lives inside the app rather than on the sign-in screen. A "prove your data is safe" button on a login page plants doubt in someone who arrived feeling fine.</div>
+    </section>
+
+    <section id="s3">
+      <h3><span class="n">03</span> Why the key in the page source isn't a hole</h3>
+      <p>If you view source, you'll find a Firebase configuration including something labelled <b>apiKey</b>. Anyone who looks for it will find it, and that is expected.</p>
+      <p>Firebase client keys <b>identify a project, they do not authorize anything</b>. They're closer to a postal address than a password. Possessing one lets you address a request to the right project; the security rules then decide whether that request is allowed, and for anyone who isn't signed in as you, the answer is no.</p>
+      <p>Mentioning this because a thoughtful person checking the source deserves an explanation rather than a scare.</p>
+    </section>
+
+    <section id="s4">
+      <h3><span class="n">04</span> Billing fields the browser cannot edit</h3>
+      <p>Your plan and lead cap live in your own account document, which raises an obvious question: what stops someone opening dev tools and writing themselves onto the top tier?</p>
+      <p>Those specific fields are <b>readable but not writable</b> by the browser. They can only be changed by a server-side function that first verifies the cryptographic signature on a payment notification from Paddle. An unsigned or forged request is rejected before it reaches the database.</p>
+    </section>
+
+    <section id="s5">
+      <h3><span class="n">05</span> Passwords and sign-in</h3>
+      <p>Authentication is handled entirely by Firebase. <b>Passwords are never seen, transmitted to, or stored by us in any form</b>, hashed or otherwise. Password resets run through Firebase's own flow.</p>
+      <p>Data is encrypted in transit and at rest by Google Cloud as standard.</p>
+    </section>
+
+    <section id="s6">
+      <h3><span class="n">06</span> Protection against your own mistakes</h3>
+      <p>Most data loss isn't an attacker. It's a misclick at the end of a long day. So destructive actions are treated as a security concern in their own right:</p>
+      <ul>
+        <li>Every deletion requires a confirmation that <b>names what will be lost</b></li>
+        <li>Frequent, easily-mistaken actions such as nurture touches have both a confirmation and an undo</li>
+        <li>A full export to spreadsheet is available at any time, capturing every record and its complete history</li>
+        <li>Reporting output is <b>aggregate only</b> by design, so sharing your numbers can never leak a name</li>
+      </ul>
+    </section>
+
+    <div class="limits reveal">
+      <h3>What isn't in place yet</h3>
+      <p>Listed because a security page that only lists strengths isn't a security page.</p>
+      <ul>
+        <li><b>No two-factor authentication.</b> Sign-in is email and password only today. Use a strong, unique password until this exists.</li>
+        <li><b>No automatic backups.</b> Backup is user-initiated via the export feature. If you'd be upset to lose your records, export periodically.</li>
+        <li><b>No formal certification.</b> There is no SOC 2, ISO 27001, or third-party penetration test. Those are meaningful for a company; this is one person, and claiming otherwise would be dishonest.</li>
+        <li><b>No published uptime history.</b> The service has no SLA and no status page yet.</li>
+      </ul>
+    </div>
+
+    <div class="report-box">
+      <h3>Found something wrong?</h3>
+      <p>If you believe you've found a vulnerability, please report it privately before disclosing it publicly. You'll get a response within two business days and credit if you'd like it. There's no bug bounty budget, so this is an appeal to good faith rather than an offer.</p>
+      <a href="mailto:support@growthseeded.com?subject=Security%20report" class="btn-primary">
+        Report privately
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <a href="/" class="wordmark"><span class="g">Growth</span><span class="s">Seeded</span></a>
+    <div class="footer-links">
+      <a href="/pricing">Pricing</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <span>&copy; 2026 GrowthSeeded</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:.14 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+
+</body>
+</html>

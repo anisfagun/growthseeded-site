@@ -1,0 +1,8 @@
+# growthseeded.com
+User-agent: *
+Allow: /
+
+# Nothing to hide, but these add no value to a search index
+Disallow: /404
+
+Sitemap: https://growthseeded.com/sitemap.xml

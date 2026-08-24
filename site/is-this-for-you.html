@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is This for You?: GrowthSeeded</title>
+<meta name="description" content="Find the version of GrowthSeeded that matches what you're actually trying to do, and an honest note on who it isn't for.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,900;1,500;1,600&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- No header/nav by design, the site's default header sits above this page. -->
+<style>
+  :root{
+    --ink:#16231D;
+    --moss:#3E6C52;
+    --moss-dark:#2E5140;
+    --gold-mark:#C9962E;
+    --gold-bright:#E8B44A;
+    --clay:#B5533C;
+    --paper:#F7F6F1;
+    --paper-dim:#EFEDE5;
+    --grey:#7C8B80;
+    --serif:'Fraunces', serif;
+    --sans:'Inter', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+    --ease:cubic-bezier(.22,1,.36,1);
+    --spring:cubic-bezier(.34,1.56,.64,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.5;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; z-index:80;
+    pointer-events:none; opacity:.035; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  a{color:inherit;}
+  svg{display:block; max-width:100%;}
+  :focus-visible{outline:2px solid var(--moss); outline-offset:3px; border-radius:2px;}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+  .section{padding:100px 0;}
+
+  .reveal{opacity:0; transform:translateY(20px); transition:opacity .8s var(--ease), transform .8s var(--ease);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  .chapter-num{font-family:var(--mono); font-size:12.5px; color:var(--gold-mark); letter-spacing:.08em; display:block; margin-bottom:15px;}
+  .section-head{max-width:620px; margin-bottom:46px;}
+  .section-head h2{font-family:var(--serif); font-weight:600; font-size:clamp(27px,3.4vw,38px); line-height:1.16; margin-bottom:13px;}
+  .section-head p{color:var(--grey); font-size:16px; max-width:520px;}
+
+  .btn-primary{
+    font-family:var(--sans); font-weight:600; font-size:15px;
+    padding:15px 28px; background:var(--moss); color:var(--paper);
+    border:none; border-radius:100px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px; cursor:pointer;
+    transition:background .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .btn-primary:hover{background:var(--moss-dark); transform:translateY(-2px); box-shadow:0 10px 24px rgba(46,81,64,.28);}
+  .btn-primary svg{width:14px; height:14px; transition:transform .25s var(--ease);}
+  .btn-primary:hover svg{transform:translateX(3px);}
+
+  .floating-cta{
+    position:fixed; right:28px; bottom:28px; z-index:60;
+    background:var(--moss); color:var(--paper); font-weight:600; font-size:14px;
+    padding:14px 24px; border-radius:100px; text-decoration:none;
+    box-shadow:0 12px 28px rgba(22,35,29,.22);
+    opacity:0; transform:translateY(14px); pointer-events:none;
+    transition:opacity .4s var(--ease), transform .4s var(--ease), background .25s var(--ease);
+  }
+  .floating-cta.visible{opacity:1; transform:translateY(0); pointer-events:auto;}
+  .floating-cta:hover{background:var(--moss-dark);}
+
+  /* ---------- hero ---------- */
+
+  .p-hero{padding:90px 0 40px;}
+  .p-hero h1{
+    font-family:var(--serif); font-weight:900;
+    font-size:clamp(40px,7vw,76px); line-height:.98; letter-spacing:-.025em;
+    margin-bottom:20px; max-width:800px;
+  }
+  .p-hero h1 .hl{
+    font-style:italic;
+    background:linear-gradient(100deg,var(--gold-mark),var(--gold-bright),var(--gold-mark));
+    background-size:220% 100%;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:shimmer 5.5s linear infinite;
+  }
+  @keyframes shimmer{0%{background-position:220% 0;} 100%{background-position:-20% 0;}}
+  .p-hero p{font-size:18px; color:#3D473F; max-width:540px; line-height:1.6;}
+
+  /* ---------- persona picker ---------- */
+
+  .picker{display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:34px;}
+  .pcard{
+    background:#fff; border:1px solid rgba(22,35,29,.09);
+    border-radius:16px; padding:22px 18px;
+    cursor:pointer; text-align:left;
+    font-family:var(--sans);
+    transition:all .3s var(--ease);
+  }
+  .pcard:hover{transform:translateY(-4px); box-shadow:0 16px 38px -20px rgba(22,35,29,.28); border-color:rgba(201,150,46,.4);}
+  .pcard.active{
+    background:var(--ink); border-color:var(--ink);
+    transform:translateY(-4px);
+    box-shadow:0 16px 40px -18px rgba(22,35,29,.45);
+  }
+  .pcard-icon{width:26px; height:26px; color:var(--gold-mark); margin-bottom:14px;}
+  .pcard.active .pcard-icon{color:var(--gold-bright);}
+  .pcard-label{font-size:14px; font-weight:600; line-height:1.3; color:var(--ink);}
+  .pcard.active .pcard-label{color:var(--paper);}
+
+  .detail{
+    background:#fff; border:1px solid rgba(22,35,29,.08);
+    border-radius:20px; padding:38px;
+    box-shadow:0 24px 70px -24px rgba(22,35,29,.2);
+  }
+  .detail-panel{display:none; animation:panelIn .5s var(--ease);}
+  .detail-panel.active{display:block;}
+  @keyframes panelIn{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:translateY(0);}}
+
+  .d-quote{
+    font-family:var(--serif); font-weight:500; font-style:italic;
+    font-size:clamp(21px,2.9vw,30px); line-height:1.32;
+    max-width:660px; margin-bottom:16px;
+  }
+  .d-quote .hl{
+    background:linear-gradient(100deg,var(--gold-mark),var(--gold-bright),var(--gold-mark));
+    background-size:220% 100%;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:shimmer 5.5s linear infinite;
+  }
+  .d-sub{font-size:15.5px; color:var(--grey); line-height:1.65; max-width:600px; margin-bottom:32px;}
+
+  .d-label{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--grey); margin-bottom:16px;
+  }
+
+  .d-steps{display:flex; gap:0; margin-bottom:32px; flex-wrap:wrap;}
+  .d-step{flex:1; min-width:96px; text-align:center; position:relative; padding-top:4px;}
+  .d-step::before{
+    content:''; position:absolute; top:15px; left:-50%; width:100%; height:2px;
+    background:rgba(22,35,29,.1); z-index:0;
+  }
+  .d-step:first-child::before{display:none;}
+  .d-node{
+    position:relative; z-index:1; margin:0 auto 10px;
+    width:30px; height:30px; border-radius:50%;
+    background:var(--paper); border:2px solid rgba(201,150,46,.5);
+    color:#8a6a1f; font-family:var(--mono); font-size:11px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .d-step:last-child .d-node{background:var(--moss); border-color:var(--moss); color:#fff;}
+  .d-steplabel{font-size:12.5px; font-weight:500; line-height:1.35; color:#3D473F; padding:0 4px;}
+
+  .d-facts{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:30px;}
+  .d-fact{
+    padding:18px 20px; border-radius:13px;
+    background:var(--paper); border:1px solid rgba(22,35,29,.06);
+  }
+  .d-fact h5{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--gold-mark); margin-bottom:7px;
+  }
+  .d-fact p{font-size:14px; line-height:1.6; color:#3D473F;}
+  .d-fact b{color:var(--ink); font-weight:600;}
+
+  /* ---------- not for you ---------- */
+
+  .notfor{
+    background:var(--paper-dim);
+    border:1px dashed rgba(181,83,60,.3);
+    border-radius:20px; padding:38px 40px;
+  }
+  .notfor ul{list-style:none;}
+  .notfor li{
+    font-size:16px; line-height:1.65; color:#3D473F;
+    padding:11px 0 11px 34px; position:relative;
+  }
+  .notfor li::before{
+    content:''; position:absolute; left:4px; top:19px;
+    width:12px; height:2px; background:var(--clay); opacity:.55;
+  }
+  .notfor li b{color:var(--ink); font-weight:600;}
+  .notfor-foot{
+    margin-top:22px; padding-top:20px;
+    border-top:1px solid rgba(22,35,29,.09);
+    font-size:15px; line-height:1.7; color:#3D473F;
+  }
+  .notfor-foot b{color:var(--ink); font-weight:600;}
+
+  /* ---------- closing ---------- */
+
+  .closing{background:var(--ink); color:var(--paper); padding:130px 0; text-align:center; position:relative; overflow:hidden;}
+  .closing::before{
+    content:''; position:absolute; top:-40%; left:50%; width:900px; height:900px;
+    transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(201,154,61,.15), transparent 65%); pointer-events:none;
+  }
+  .closing-inner{position:relative; z-index:1;}
+  .closing h2{
+    font-family:var(--serif); font-weight:900; font-style:italic;
+    font-size:clamp(32px,5.4vw,58px); line-height:1.05; letter-spacing:-.02em;
+    max-width:680px; margin:0 auto 30px;
+  }
+  .closing .btn-primary{background:var(--gold-mark); color:var(--ink);}
+  .closing .btn-primary:hover{background:#dcae4f; box-shadow:0 10px 30px rgba(201,150,46,.3);}
+  .closing-micro{font-family:var(--mono); font-size:12.5px; color:rgba(247,246,241,.5); margin-top:20px;}
+
+  .footer{padding:40px 0; display:flex; align-items:center; justify-content:space-between; font-size:13px; color:var(--grey); flex-wrap:wrap; gap:14px;; border-top:1px solid rgba(22,35,29,.08);}
+  .wordmark{font-family:var(--sans); font-size:15px; display:flex; align-items:baseline; gap:1px; text-decoration:none;}
+  .wordmark .g{font-weight:900; font-style:italic; color:var(--ink);}
+  .wordmark .s{font-weight:400; font-style:italic; color:var(--grey);}
+  .footer-links{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-links a{text-decoration:none; border-bottom:1px solid transparent; transition:.2s;}
+  .footer-links a:hover{border-color:var(--grey);}
+
+  @media (max-width:900px){
+    .picker{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:640px){
+    .picker{grid-template-columns:repeat(2,1fr); gap:10px;}
+    .d-facts{grid-template-columns:1fr;}
+    .d-step::before{display:none;}
+    .d-step{min-width:70px;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .section{padding:70px 0;}
+    .p-hero{padding:60px 0 32px;}
+    .detail, .notfor{padding:24px;}
+    .floating-cta{right:18px; bottom:18px; padding:12px 20px; font-size:13px;}
+    .footer{flex-direction:column; text-align:center;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- shared site header ---------- */
+  .site-header{
+    background:var(--paper);
+    border-bottom:1px solid rgba(22,35,29,.08);
+    position:relative;
+    z-index:70;
+  }
+  .site-header-inner{
+    max-width:1140px;
+    margin:0 auto;
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .site-nav{
+    display:flex;
+    gap:28px;
+    flex:1;
+    justify-content:center;
+  }
+  .site-nav a{
+    font-family:var(--sans);
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:border-color .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .site-nav a:hover{
+    border-color:var(--gold-mark);
+    color:var(--moss-dark);
+  }
+  .site-header-cta{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:14px;
+    padding:10px 20px;
+    background:var(--moss);
+    color:var(--paper);
+    border-radius:100px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background .25s ease, transform .25s ease;
+    flex-shrink:0;
+  }
+  .site-header-cta:hover{
+    background:var(--moss-dark);
+    transform:translateY(-1px);
+    color:var(--paper);
+  }
+  @media (max-width:760px){
+    .site-nav{ display:none; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="/" class="wordmark"><span class="g">Growth</span><span class="s">Seeded</span></a>
+    <nav class="site-nav">
+      <a href="/is-this-for-you">Is this for you?</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/security">Security</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <a href="https://app.growthseeded.com" class="site-header-cta">Start now</a>
+  </div>
+</header>
+
+
+
+<a href="https://app.growthseeded.com" class="floating-cta" id="floatingCta">Start now</a>
+
+<section class="p-hero" id="top">
+  <div class="wrap">
+    <h1>Same tool. <span class="hl">Five very different</span> reasons to use it.</h1>
+    <p>GrowthSeeded sets itself up around what you're actually chasing. Pick the one closest to your situation and see what it looks like from the inside.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:24px;" id="personas">
+  <div class="wrap">
+    <div class="picker reveal" id="picker" role="tablist">
+      <button class="pcard active" data-p="raise" role="tab" type="button">
+        <svg class="pcard-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V13M11 22V7M18 22v-6M25 22V4"/></svg>
+        <span class="pcard-label">Raising investment</span>
+      </button>
+      <button class="pcard" data-p="job" role="tab" type="button">
+        <svg class="pcard-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="22" height="16" rx="2.5"/><path d="M10 8V5.5A1.5 1.5 0 0111.5 4h5A1.5 1.5 0 0118 5.5V8"/></svg>
+        <span class="pcard-label">Job hunting</span>
+      </button>
+      <button class="pcard" data-p="client" role="tab" type="button">
+        <svg class="pcard-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l3.4 7 7.6.9-5.6 5.2 1.5 7.5L14 20l-6.9 3.6L8.6 16 3 10.9 10.6 10z"/></svg>
+        <span class="pcard-label">Winning clients</span>
+      </button>
+      <button class="pcard" data-p="hire" role="tab" type="button">
+        <svg class="pcard-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="9" r="4.5"/><path d="M3 24c0-4.4 3.6-7 8-7s8 2.6 8 7"/><path d="M21 8v7M24.5 11.5h-7"/></svg>
+        <span class="pcard-label">Hiring people</span>
+      </button>
+      <button class="pcard" data-p="network" role="tab" type="button">
+        <svg class="pcard-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="6" r="3"/><circle cx="5" cy="21" r="3"/><circle cx="23" cy="21" r="3"/><path d="M12 8.6L7 18.4M16 8.6l5 9.8M8 21h12"/></svg>
+        <span class="pcard-label">Just staying close</span>
+      </button>
+    </div>
+
+    <div class="detail reveal" id="detail">
+
+      <div class="detail-panel active" data-p="raise">
+        <p class="d-quote">The investor who said <span class="hl">"not now"</span> in March leads your round in September, because you were the only founder who kept showing up.</p>
+        <p class="d-sub">Fundraising is mostly soft passes. A tool that treats every "not yet" as a dead lead is working against you for eleven months out of twelve.</p>
+        <p class="d-label">A typical sequence</p>
+        <div class="d-steps">
+          <div class="d-step"><div class="d-node">1</div><div class="d-steplabel">Engage their post</div></div>
+          <div class="d-step"><div class="d-node">2</div><div class="d-steplabel">Connection request</div></div>
+          <div class="d-step"><div class="d-node">3</div><div class="d-steplabel">Intro DM</div></div>
+          <div class="d-step"><div class="d-node">4</div><div class="d-steplabel">Traction update</div></div>
+          <div class="d-step"><div class="d-node">&#10003;</div><div class="d-steplabel">Ask for the call</div></div>
+        </div>
+        <div class="d-facts">
+          <div class="d-fact"><h5>What "done" means</h5><p><b>Intro call booked.</b> Nothing else marks a lead complete, so the number on your dashboard is the number that matters.</p></div>
+          <div class="d-fact"><h5>Where Nurture earns its keep</h5><p>Every soft pass moves here automatically. <b>Quarterly updates, no ask attached</b>, so the next raise starts warm.</p></div>
+        </div>
+      </div>
+
+      <div class="detail-panel" data-p="job">
+        <p class="d-quote">You stop firing applications into the void and start walking in through <span class="hl">someone who knows your name</span>.</p>
+        <p class="d-sub">A referral beats an application almost every time. The hard part isn't knowing that, it's building the relationships months before you need them.</p>
+        <p class="d-label">A typical sequence</p>
+        <div class="d-steps">
+          <div class="d-step"><div class="d-node">1</div><div class="d-steplabel">Comment on their work</div></div>
+          <div class="d-step"><div class="d-node">2</div><div class="d-steplabel">Connection request</div></div>
+          <div class="d-step"><div class="d-node">3</div><div class="d-steplabel">Intro DM</div></div>
+          <div class="d-step"><div class="d-node">4</div><div class="d-steplabel">Genuine question</div></div>
+          <div class="d-step"><div class="d-node">&#10003;</div><div class="d-steplabel">Ask for a referral</div></div>
+        </div>
+        <div class="d-facts">
+          <div class="d-fact"><h5>What "done" means</h5><p><b>Referral or interview.</b> Set it to whichever you're actually chasing; it's one field.</p></div>
+          <div class="d-fact"><h5>Where Nurture earns its keep</h5><p>Dream companies you're <b>not ready for yet</b>. Stay visible for a year, then apply as a familiar name.</p></div>
+        </div>
+      </div>
+
+      <div class="detail-panel" data-p="client">
+        <p class="d-quote">The prospect who wasn't ready in spring comes back in autumn, and you're <span class="hl">still there</span>, still relevant, never once annoying.</p>
+        <p class="d-sub">Most freelance pipelines die of forgetting, not of rejection. "Maybe in a few months" is a real answer that almost nobody follows up on properly.</p>
+        <p class="d-label">A typical sequence</p>
+        <div class="d-steps">
+          <div class="d-step"><div class="d-node">1</div><div class="d-steplabel">Engage their post</div></div>
+          <div class="d-step"><div class="d-node">2</div><div class="d-steplabel">Connection request</div></div>
+          <div class="d-step"><div class="d-node">3</div><div class="d-steplabel">Intro DM</div></div>
+          <div class="d-step"><div class="d-node">4</div><div class="d-steplabel">Something useful, free</div></div>
+          <div class="d-step"><div class="d-node">&#10003;</div><div class="d-steplabel">Propose a call</div></div>
+        </div>
+        <div class="d-facts">
+          <div class="d-fact"><h5>What "done" means</h5><p><b>Discovery call booked.</b> The proposal comes after; this tracks getting in the room.</p></div>
+          <div class="d-fact"><h5>Where Nurture earns its keep</h5><p>Every <b>"not right now"</b> keeps its own clock. You reappear when their timing changes, not when yours does.</p></div>
+        </div>
+      </div>
+
+      <div class="detail-panel" data-p="hire">
+        <p class="d-quote">The senior engineer who passed last quarter takes your call this quarter, because you <span class="hl">stayed a person</span>, not a recruiter blast.</p>
+        <p class="d-sub">The best candidates are never looking when you need them. Sourcing that only starts when a role opens is sourcing that's already too late.</p>
+        <p class="d-label">A typical sequence</p>
+        <div class="d-steps">
+          <div class="d-step"><div class="d-node">1</div><div class="d-steplabel">Engage their work</div></div>
+          <div class="d-step"><div class="d-node">2</div><div class="d-steplabel">Connection request</div></div>
+          <div class="d-step"><div class="d-node">3</div><div class="d-steplabel">Intro DM</div></div>
+          <div class="d-step"><div class="d-node">4</div><div class="d-steplabel">The role, in context</div></div>
+          <div class="d-step"><div class="d-node">&#10003;</div><div class="d-steplabel">Interview scheduled</div></div>
+        </div>
+        <div class="d-facts">
+          <div class="d-fact"><h5>What "done" means</h5><p><b>Interview scheduled.</b> Passive candidates who said no stay tracked rather than getting discarded.</p></div>
+          <div class="d-fact"><h5>Where Nurture earns its keep</h5><p>Your <b>long list for next quarter</b>. Low-frequency, genuine contact, so the next role opens with warm names already in hand.</p></div>
+        </div>
+      </div>
+
+      <div class="detail-panel" data-p="network">
+        <p class="d-quote">You become the person who reaches out <span class="hl">before</span> they need something. Which is the only kind of networking that ever works.</p>
+        <p class="d-sub">No pipeline, no quota, no ask. Just not being the person who resurfaces after two years of silence with a favor to request.</p>
+        <p class="d-label">A typical rhythm</p>
+        <div class="d-steps">
+          <div class="d-step"><div class="d-node">1</div><div class="d-steplabel">Notice something real</div></div>
+          <div class="d-step"><div class="d-node">2</div><div class="d-steplabel">Say it, briefly</div></div>
+          <div class="d-step"><div class="d-node">3</div><div class="d-steplabel">Let it breathe</div></div>
+          <div class="d-step"><div class="d-node">4</div><div class="d-steplabel">Show up again</div></div>
+          <div class="d-step"><div class="d-node">&#8734;</div><div class="d-steplabel">Keep going</div></div>
+        </div>
+        <div class="d-facts">
+          <div class="d-fact"><h5>What "done" means</h5><p><b>Nothing has to close.</b> The outcome field is optional here, and most people never turn it on.</p></div>
+          <div class="d-fact"><h5>Where Nurture earns its keep</h5><p>This is the whole product for you. <b>Everyone lives in Nurture, indefinitely</b>, on whatever interval feels right per person.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="notfor">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="chapter-num">Worth saying plainly</span>
+      <h2>And here's who it isn't for.</h2>
+      <p>Better you find out now than after a payment.</p>
+    </div>
+
+    <div class="notfor reveal">
+      <ul>
+        <li><b>Anyone who wants messages sent automatically.</b> GrowthSeeded never sends anything. If that's the job you're hiring for, this is the wrong tool and an automation product will serve you better.</li>
+        <li><b>Anyone working a scraped or purchased list.</b> There's no import from a data vendor, no enrichment, and the caps make volume outreach impractical on purpose.</li>
+        <li><b>Sales teams needing a shared CRM.</b> Every account is fully isolated. There are no shared pipelines, no deal stages, no manager dashboards.</li>
+        <li><b>Anyone tracking fewer than about five people.</b> Your memory is genuinely fine at that size. Come back when it isn't.</li>
+      </ul>
+      <p class="notfor-foot">If you're in one of those groups, <b>please don't sign up.</b> A refund is easy but your time isn't, and a product that quietly takes money from people it can't help isn't one worth building.</p>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="closing">
+  <div class="wrap closing-inner">
+    <h2>Whichever one you are, it starts the same way.</h2>
+    <a href="https://app.growthseeded.com" class="btn-primary">
+      Add your first person
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <p class="closing-micro">One name. About fifteen seconds. No card.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer" style="display:flex; align-items:center; justify-content:space-between;">
+    <a href="/" class="wordmark"><span class="g">Growth</span><span class="s">Seeded</span></a>
+    <div class="footer-links">
+      <a href="/pricing">Pricing</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <span>&copy; 2026 GrowthSeeded</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* reveal */
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:.14 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* persona picker */
+  const cards = Array.from(document.querySelectorAll('.pcard'));
+  const panels = Array.from(document.querySelectorAll('.detail-panel'));
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const key = card.dataset.p;
+      cards.forEach(c => c.classList.toggle('active', c === card));
+      panels.forEach(p => p.classList.toggle('active', p.dataset.p === key));
+    });
+  });
+
+  /* floating cta */
+  const cta = document.getElementById('floatingCta');
+  const top = document.getElementById('top');
+  if(cta && top){
+    new IntersectionObserver(es => {
+      es.forEach(e => cta.classList.toggle('visible', !e.isIntersecting));
+    }, { threshold:.1 }).observe(top);
+  }
+})();
+</script>
+
+</body>
+</html>
