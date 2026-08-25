@@ -1,6 +1,8 @@
 # GrowthSeeded — Marketing Site
 
 The public marketing site for [GrowthSeeded](https://growthseeded.com), a personal relationship-tracking tool for deliberate LinkedIn outreach. This repo covers the marketing site only (`growthseeded.com`). The app itself (`app.growthseeded.com`) lives in a separate repo.
+<img width="452" height="332" alt="image" src="https://github.com/user-attachments/assets/9c997030-0a64-46b7-9033-e62e66c26db8" />
+
 
 ## Stack
 
