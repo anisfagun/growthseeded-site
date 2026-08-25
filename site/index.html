@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GrowthSeeded: Grow Relationships</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="description" content="A relationship tracker that moves at the pace of the reply. No automation, no LinkedIn API, nothing that can be banned or broken.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,7 +60,7 @@
   .wordmark .g{font-weight:900; font-style:italic; color:var(--ink);}
   .wordmark .s{font-weight:400; font-style:italic; color:var(--grey);}
 
-  /* ---------- floating cta + rail ---------- */
+  /* ---------- floating cta ---------- */
 
   .floating-cta{
     position:fixed; right:28px; bottom:28px; z-index:60;
@@ -74,18 +74,6 @@
   .floating-cta.visible{opacity:1; transform:translateY(0); pointer-events:auto;}
   .floating-cta:hover{background:var(--moss-dark);}
 
-  .rail{
-    position:fixed; right:30px; top:50%; transform:translateY(-50%); z-index:55;
-    display:flex; flex-direction:column; align-items:flex-end; gap:20px;
-    opacity:0; pointer-events:none; transition:opacity .4s var(--ease);
-  }
-  .rail.visible{opacity:1; pointer-events:auto;}
-  .rail-dot{position:relative; background:none; border:none; cursor:pointer; padding:6px; display:flex; align-items:center; gap:10px;}
-  .rail-dot::after{content:''; width:7px; height:7px; border-radius:50%; background:var(--grey); opacity:.5; transition:all .3s var(--ease);}
-  .rail-dot.active::after{background:var(--gold-mark); opacity:1; transform:scale(1.5);}
-  .rail-label{font-family:var(--mono); font-size:11px; color:var(--ink); opacity:0; transform:translateX(6px); transition:.25s var(--ease); white-space:nowrap;}
-  .rail-dot:hover .rail-label, .rail-dot.active .rail-label{opacity:.75; transform:translateX(0);}
-
   /* ---------- hero ---------- */
 
   .hero{
@@ -95,9 +83,9 @@
   }
 
   .hero-mark{
-    position:absolute; z-index:0; right:-40px; top:50%;
+    position:absolute; z-index:0; right:0px; top:50%;
     transform:translateY(-50%);
-    width:clamp(300px, 32vw, 520px); pointer-events:none;
+    width:clamp(190px, 20vw, 320px); pointer-events:none;
   }
   .hero-mark-glow{
     position:absolute; inset:-25%;
@@ -125,9 +113,9 @@
   .kinetic{
     font-family:var(--serif);
     font-weight:900;
-    font-size:clamp(52px, 11vw, 132px);
-    line-height:0.9;
-    letter-spacing:-0.03em;
+    font-size:clamp(42px, 7.2vw, 84px);
+    line-height:0.98;
+    letter-spacing:-0.02em;
     margin-bottom:28px;
   }
   .kinetic .line{display:block; overflow:hidden;}
@@ -179,7 +167,8 @@
   .hero-microcopy{font-family:var(--mono); font-size:12.5px; color:var(--grey); margin-top:20px; opacity:0;}
 
   .scroll-cue{
-    position:absolute; bottom:36px; left:32px;
+    position:absolute; bottom:36px;
+    left:max(32px, calc((100vw - 1140px) / 2 + 32px));
     font-family:var(--mono); font-size:11px; color:var(--grey);
     display:flex; align-items:center; gap:8px; opacity:0;
   }
@@ -391,44 +380,14 @@
   }
   .load-stage.settled .load-caption{color:var(--moss-dark);}
 
-  /* ---------- name capture ---------- */
+  /* ---------- load cta ---------- */
 
-  .capture{
-    margin-top:30px; padding:28px;
-    border-radius:16px;
-    background:linear-gradient(150deg, rgba(201,150,46,.09), rgba(62,108,82,.06));
-    border:1px solid rgba(201,150,46,.22);
+  .load-cta{
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    margin-top:26px; padding-top:22px;
+    border-top:1px solid rgba(22,35,29,.08);
   }
-  .capture-q{
-    font-family:var(--serif); font-weight:600; font-size:clamp(19px,2.4vw,25px);
-    line-height:1.3; margin-bottom:8px;
-  }
-  .capture-sub{font-size:14px; color:var(--grey); margin-bottom:20px;}
-  .capture-row{display:flex; gap:10px; flex-wrap:wrap;}
-  .capture-input{
-    flex:1; min-width:200px;
-    font-family:var(--sans); font-size:15px;
-    padding:14px 18px; border-radius:100px;
-    border:1px solid rgba(22,35,29,.16); background:#fff; color:var(--ink);
-    transition:border-color .25s var(--ease), box-shadow .25s var(--ease);
-  }
-  .capture-input::placeholder{color:#A9B2AB;}
-  .capture-input:focus{outline:none; border-color:var(--moss); box-shadow:0 0 0 4px rgba(62,108,82,.1);}
-  .capture-done{
-    display:none;
-    animation:panelIn .5s var(--ease);
-  }
-  .capture.answered .capture-form{display:none;}
-  .capture.answered .capture-done{display:block;}
-  @keyframes panelIn{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:translateY(0);}}
-  .capture-done p{font-size:15px; line-height:1.65; color:#3D473F;}
-  .capture-done .nm{font-weight:700; color:var(--ink);}
-  .capture-edit{
-    background:none; border:none; cursor:pointer;
-    font-family:var(--mono); font-size:11.5px; color:var(--grey);
-    border-bottom:1px dashed var(--grey); padding:0 0 1px; margin-top:14px;
-  }
-  .capture-edit:hover{color:var(--moss-dark); border-color:var(--moss-dark);}
+  .load-cta-note{font-family:var(--mono); font-size:12px; color:var(--grey);}
 
   /* ---------- objections ---------- */
 
@@ -470,11 +429,6 @@
 
   /* ---------- closing extras ---------- */
 
-  .closing-personal{
-    font-family:var(--mono); font-size:13px;
-    color:var(--gold-mark); margin-bottom:6px;
-    min-height:20px;
-  }
   .closing-effort{
     display:flex; gap:26px; justify-content:center; flex-wrap:wrap;
     margin-top:34px; padding-top:26px;
@@ -521,7 +475,7 @@
 
   /* ---------- responsive ---------- */
 
-  @media (max-width:900px){ .rail{display:none;} .trust{grid-template-columns:repeat(2,1fr); gap:28px;} }
+  @media (max-width:900px){ .trust{grid-template-columns:repeat(2,1fr); gap:28px;} }
   @media (max-width:820px){
     .hero-inner{max-width:100%;}
     .hero-mark{right:50%; top:auto; bottom:-40px; transform:translate(50%,0); width:min(60vw,340px); opacity:.32;}
@@ -622,17 +576,6 @@
 
 <a href="https://app.growthseeded.com" class="floating-cta" id="floatingCta">Start now</a>
 
-<nav class="rail" id="rail" aria-label="Page sections">
-  <button class="rail-dot" data-target="engine"><span class="rail-label">The timing question</span></button>
-  <button class="rail-dot" data-target="moment"><span class="rail-label">The moment</span></button>
-  <button class="rail-dot" data-target="message"><span class="rail-label">The message</span></button>
-  <button class="rail-dot" data-target="load"><span class="rail-label">The weight</span></button>
-  <button class="rail-dot" data-target="doubts"><span class="rail-label">Your doubts</span></button>
-  <button class="rail-dot" data-target="note"><span class="rail-label">From the founder</span></button>
-  <button class="rail-dot" data-target="why"><span class="rail-label">Why it's safe</span></button>
-  <button class="rail-dot" data-target="closing"><span class="rail-label">Start now</span></button>
-</nav>
-
 <section class="hero" id="hero">
   <div class="hero-mark" id="heroMark" aria-hidden="true">
     <div class="hero-mark-glow"></div>
@@ -656,7 +599,8 @@
       <p class="eyebrow" id="eyebrow">Deliberate, never automated</p>
       <h1 class="kinetic">
         <span class="line"><span class="word grow-word" data-d="0">Grow</span></span>
-        <span class="line"><span class="word rel-word" data-d="140">Relationships</span></span>
+        <span class="line"><span class="word rel-word" data-d="120">Professional</span></span>
+        <span class="line"><span class="word rel-word" data-d="240">Relationship</span></span>
       </h1>
       <p class="sub" id="subhead">You know exactly who you should be staying close to. GrowthSeeded makes sure you actually are, so you're already there when it counts.</p>
       <div class="hero-cta-row" id="herocta">
@@ -838,22 +782,12 @@
         <p class="load-caption" id="loadCaption">Five things. You're probably holding more than five.</p>
       </div>
 
-      <div class="capture" id="capture">
-        <div class="capture-form">
-          <p class="capture-q">One name. Who have you been meaning to reach out to?</p>
-          <p class="capture-sub">Nobody sees this. It stays on this page. Just say it out loud once.</p>
-          <div class="capture-row">
-            <input type="text" class="capture-input" id="captureInput" placeholder="First name is enough" maxlength="40" autocomplete="off" aria-label="A person you have been meaning to contact">
-            <button class="btn-primary" id="captureBtn" type="button">
-              That's the one
-              <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
-        </div>
-        <div class="capture-done" id="captureDone">
-          <p id="captureMsg"></p>
-          <button class="capture-edit" id="captureEdit" type="button">Someone else, actually</button>
-        </div>
+      <div class="load-cta">
+        <a href="https://app.growthseeded.com" class="btn-primary">
+          Get this out of your head
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <span class="load-cta-note">One name. About fifteen seconds. No card.</span>
       </div>
     </div>
   </div>
@@ -869,20 +803,12 @@
 
     <div class="obj reveal">
       <div class="obj-item">
-        <p class="obj-q">I'll set it up and never open it again.</p>
-        <p class="obj-a">That happens when a tool asks you to maintain it. This one only ever shows you what's due <b>today</b>, and if nothing is due, it shows you nothing. There's no backlog glaring at you, no streak to break, nothing to feel guilty about on a quiet week.</p>
-      </div>
-      <div class="obj-item">
-        <p class="obj-q">This is going to feel fake and salesy.</p>
-        <p class="obj-a">Nothing sends itself. Not one message leaves without you writing it. The app never touches LinkedIn, never automates a word, and never speaks in your voice. <b>It just makes sure you're the one who remembered.</b></p>
-      </div>
-      <div class="obj-item">
         <p class="obj-q">I don't have time to enter a hundred people.</p>
         <p class="obj-a">Then don't. Add the one person you just thought of and stop there. <b>One name is a working system</b>, and it takes about fifteen seconds. Most people add the second and third within a week, because the first one worked.</p>
       </div>
       <div class="obj-item">
-        <p class="obj-q">Isn't this just a spreadsheet with extra steps?</p>
-        <p class="obj-a">A spreadsheet needs you to remember to open it and work out who's overdue. That's the exact task you already fail at. <b>The whole point is that the thinking happens without you.</b></p>
+        <p class="obj-q">This is going to feel fake and salesy.</p>
+        <p class="obj-a">Nothing sends itself. Not one message leaves without you writing it. The app never touches LinkedIn, never automates a word, and never speaks in your voice. <b>It just makes sure you're the one who remembered.</b></p>
       </div>
     </div>
   </div>
@@ -896,9 +822,8 @@
     </div>
 
     <div class="note-card reveal">
-      <p>I could have put five glowing quotes here. Plenty of new products do. But GrowthSeeded is new, and inventing praise for it would be a strange way to start a relationship with you, on a page about being sincere with people.</p>
-      <p>So here's what's actually true. I built this for myself first, because I kept losing track of people I genuinely respected, and kept noticing that <b>the only ones who stayed in my life were the ones I happened to remember.</b> That felt like a bad way to run a life.</p>
-      <p>It's a small tool made by one person. It does one thing carefully instead of ten things loosely. If it works for you, tell someone. If it doesn't, tell me.</p>
+      <p>I could have put five glowing quotes here. But GrowthSeeded is new, and inventing praise for it would be a strange way to start a relationship with you, on a page about being sincere with people.</p>
+      <p>So here's what's true instead: I built this because I kept losing track of people I genuinely respected, and the only ones who stayed in my life were the ones I happened to remember. That felt like a bad way to run a life. It's a small tool made by one person, doing one thing carefully. If it works for you, tell someone. If it doesn't, tell me.</p>
       <div class="note-sig">Anis, founder, GrowthSeeded</div>
     </div>
   </div>
@@ -938,8 +863,7 @@
 <section class="closing" id="closing">
   <div class="wrap closing-inner">
     <span class="chapter-num">08, Start now</span>
-    <p class="closing-personal" id="closingPersonal"></p>
-    <h2 id="closingHead">The people worth knowing won't wait for <span class="hl">someday</span>.</h2>
+    <h2>The people worth knowing won't wait for <span class="hl">someday</span>.</h2>
     <a href="https://app.growthseeded.com" class="btn-primary">
       Add your first person
       <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -970,7 +894,7 @@
   });
 
   [
-    ['eyebrow', 60], ['subhead', 620], ['herocta', 740], ['heromicro', 860]
+    ['eyebrow', 60], ['subhead', 700], ['herocta', 820], ['heromicro', 940]
   ].forEach(([id, delay]) => {
     const el = document.getElementById(id);
     if(!el) return;
@@ -1180,8 +1104,7 @@
     if(!reduced) notes.forEach(n => n.classList.add('drift'));
 
     let settled = false;
-    loadStage.addEventListener('click', (ev) => {
-      if(ev.target.closest('.capture')) return;
+    loadStage.addEventListener('click', () => {
       if(settled) {
         // let them replay it
         settled = false;
@@ -1207,71 +1130,16 @@
     });
   }
 
-  /* ---- name capture: micro-commitment threaded to the close ---- */
-  const cap = document.getElementById('capture');
-  const capInput = document.getElementById('captureInput');
-  const capBtn = document.getElementById('captureBtn');
-  const capMsg = document.getElementById('captureMsg');
-  const capEdit = document.getElementById('captureEdit');
-  const closingPersonal = document.getElementById('closingPersonal');
-  const closingHead = document.getElementById('closingHead');
-
-  function esc(s){
-    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-
-  function commitName(){
-    const raw = (capInput.value || '').trim();
-    if(!raw) { capInput.focus(); return; }
-    const name = esc(raw.slice(0, 40));
-    capMsg.innerHTML = '<span class="nm">' + name + '</span> has been sitting on that list for a while, hasn\'t ' +
-      'he or she? Nothing on this page changes that. The next thirty seconds might.';
-    cap.classList.add('answered');
-    if(closingPersonal) closingPersonal.textContent = 'You said ' + raw.slice(0, 40) + '.';
-    if(closingHead) closingHead.innerHTML = 'Reach out to <span class="hl">' + name + '</span> this week.';
-  }
-
-  if(capBtn) capBtn.addEventListener('click', commitName);
-  if(capInput) capInput.addEventListener('keydown', e => { if(e.key === 'Enter') commitName(); });
-  if(capEdit) capEdit.addEventListener('click', () => {
-    cap.classList.remove('answered');
-    capInput.value = '';
-    capInput.focus();
-    if(closingPersonal) closingPersonal.textContent = '';
-    if(closingHead) closingHead.innerHTML = 'The people worth knowing won\'t wait for <span class="hl">someday</span>.';
-  });
-
-  /* ---- chrome visibility + rail ---- */
+  /* ---- chrome visibility ---- */
   const cta = document.getElementById('floatingCta');
-  const rail = document.getElementById('rail');
   if(hero){
     new IntersectionObserver(es => {
-      es.forEach(e => {
-        const show = !e.isIntersecting;
-        cta && cta.classList.toggle('visible', show);
-        rail && rail.classList.toggle('visible', show);
-      });
+      es.forEach(e => cta && cta.classList.toggle('visible', !e.isIntersecting));
     }, { threshold:.1 }).observe(hero);
   }
-
-  const dots = Array.from(document.querySelectorAll('.rail-dot'));
-  dots.forEach(d => d.addEventListener('click', () => {
-    const t = document.getElementById(d.dataset.target);
-    if(t) t.scrollIntoView({ behavior:'smooth' });
-  }));
-  const chapterObs = new IntersectionObserver(es => {
-    es.forEach(e => {
-      if(e.isIntersecting){
-        dots.forEach(d => d.classList.toggle('active', d.dataset.target === e.target.id));
-      }
-    });
-  }, { threshold:.4 });
-  ['engine','moment','message','load','doubts','note','why','closing'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) chapterObs.observe(el);
-  });
 })();
 </script>
 
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fed1f519edaf4e8ead9d7d0facb8dd46"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
