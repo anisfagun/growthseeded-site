@@ -240,6 +240,54 @@
   @media (max-width:760px){
     .site-nav{ display:none; }
   }
+
+  /* ---------- shared site footer ---------- */
+  .site-footer{
+    border-top:1px solid rgba(22,35,29,.08);
+    background:var(--paper);
+    margin-top:auto;
+  }
+  .site-footer-inner{
+    max-width:1140px;
+    margin:0 auto;
+    padding:34px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px 28px;
+    flex-wrap:wrap;
+  }
+  .site-footer .wordmark{
+    font-family:var(--sans); font-size:15px;
+    display:flex; align-items:baseline; gap:1px;
+    text-decoration:none; color:var(--ink);
+    flex-shrink:0;
+  }
+  .site-footer .wordmark .g{font-weight:900; font-style:italic; color:var(--ink);}
+  .site-footer .wordmark .s{font-weight:400; font-style:italic; color:var(--grey);}
+  .site-footer-links{
+    display:flex; gap:8px 22px; flex-wrap:wrap;
+    flex:1; justify-content:center;
+  }
+  .site-footer-links a{
+    font-family:var(--sans); font-size:13.5px;
+    color:var(--grey); text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:1px;
+    transition:color .2s ease, border-color .2s ease;
+    white-space:nowrap;
+  }
+  .site-footer-links a:hover{color:var(--ink); border-color:var(--gold-mark);}
+  .site-footer-copy{
+    font-family:var(--sans); font-size:13px; color:var(--grey);
+    flex-shrink:0;
+  }
+  @media (max-width:760px){
+    .site-footer-inner{
+      flex-direction:column; text-align:center; padding:28px 20px;
+    }
+    .site-footer-links{justify-content:center;}
+  }
 </style>
 </head>
 <body>
@@ -261,7 +309,7 @@
 <div class="wrap">
   <div class="doc-head">
     <p class="doc-kicker">Security</p>
-    <h1>You can <span class="hl">check this yourself.</span> You don't have to believe me.</h1>
+    <h1>You can <span class="hl">check this yourself.</span> You don't have to take our word for it.</h1>
     <p>A page about who you know is a sensitive thing to hand someone. Here is exactly how it's protected, in terms specific enough to verify rather than vague enough to sound good.</p>
   </div>
 
@@ -345,7 +393,7 @@ match /accounts/{userId} {
       <ul>
         <li><b>No two-factor authentication.</b> Sign-in is email and password only today. Use a strong, unique password until this exists.</li>
         <li><b>No automatic backups.</b> Backup is user-initiated via the export feature. If you'd be upset to lose your records, export periodically.</li>
-        <li><b>No formal certification.</b> There is no SOC 2, ISO 27001, or third-party penetration test. Those are meaningful for a company; this is one person, and claiming otherwise would be dishonest.</li>
+        <li><b>No formal certification.</b> There is no SOC 2, ISO 27001, or third-party penetration test. Those are meaningful at a larger scale; we are a small team, and claiming otherwise would be dishonest.</li>
         <li><b>No published uptime history.</b> The service has no SLA and no status page yet.</li>
       </ul>
     </div>
@@ -361,16 +409,21 @@ match /accounts/{userId} {
 
   </main>
 
-  <footer class="footer">
+  <footer class="site-footer">
+  <div class="site-footer-inner">
     <a href="/" class="wordmark"><span class="g">Growth</span><span class="s">Seeded</span></a>
-    <div class="footer-links">
+    <nav class="site-footer-links" aria-label="Footer">
+      <a href="/is-this-for-you">Is this for you?</a>
       <a href="/pricing">Pricing</a>
-      <a href="/privacy">Privacy</a>
+      <a href="/security">Security</a>
       <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/refund-policy">Refund Policy</a>
       <a href="/contact">Contact</a>
-    </div>
-    <span>&copy; 2026 GrowthSeeded</span>
-  </footer>
+    </nav>
+    <span class="site-footer-copy">&copy; 2026 GrowthSeeded</span>
+  </div>
+</footer>
 </div>
 
 <script>
