@@ -80,29 +80,28 @@ I have more than 9 years in marketing and content, most of it in B2B and SaaS. T
 
 ---
 
-# GrowthSeeded — Marketing Site
+## The first website (archive)
 
-The public marketing site for [GrowthSeeded](https://growthseeded.com), a personal relationship-tracking tool for deliberate LinkedIn outreach. This repo covers the marketing site only (`growthseeded.com`). The app itself (`app.growthseeded.com`) lives in a separate repo.
+The first marketing site for [GrowthSeeded](https://growthseeded.com), a simple follow-up tracker for LinkedIn. This repo held the marketing site only (`growthseeded.com`). The app (`app.growthseeded.com`) lived in a separate repo.
 <img width="452" height="332" alt="image" src="https://github.com/user-attachments/assets/9c997030-0a64-46b7-9033-e62e66c26db8" />
 
+### Stack
 
-## Stack
+Plain HTML, CSS and JavaScript. No framework, no build step, no npm packages at runtime.
 
-Plain HTML, CSS, and JavaScript. No framework, no build step, no npm dependencies at runtime.
+That was on purpose:
 
-That's a deliberate choice, not a placeholder for something more advanced later:
+- The site was nine pages of mostly static content. A framework like React solves problems (state across dozens of components, complex client-side routing) that this site didn't have.
+- Fewer moving parts meant fewer things to secure, update and break. One person maintained it.
+- It loaded fast and could be hosted anywhere, with no build pipeline.
 
-- The site is nine pages of mostly static content. A framework like React solves problems (state management across dozens of components, complex client-side routing) that this project doesn't have.
-- Fewer moving parts means fewer things to secure, update, and eventually break. One person maintains this.
-- It loads fast and deploys anywhere, no build pipeline required.
+The plan was to move to a static site generator once the site published blog posts and case studies regularly. When that time came, it moved to Astro with a headless CMS (see the top of this page).
 
-If the site grows to the point of publishing blog posts and case studies regularly, the next step under consideration is a **static site generator** (Eleventy), which still outputs plain HTML, rather than moving to a framework.
-
-## Structure
+### Structure
 
 ```
 growthseeded-site/
-├── site/                  # everything that gets deployed
+├── site/                  # everything that got deployed
 │   ├── index.html         # homepage
 │   ├── is-this-for-you.html
 │   ├── pricing.html
@@ -115,50 +114,50 @@ growthseeded-site/
 │   ├── robots.txt
 │   ├── sitemap.xml
 │   ├── favicon.svg
-│   └── og/                # Open Graph social preview images
+│   └── og/                # link preview images
 ├── .gitignore
 └── README.md
 ```
 
-Each HTML file is fully self-contained: its own `<style>` block and `<script>` block, no shared CSS/JS file yet. That's the main thing worth refactoring next, since brand colors and shared components (buttons, footer) are currently duplicated across all nine files.
+Each HTML file stood on its own, with its own `<style>` and `<script>` blocks and no shared CSS or JS file. Brand colors and shared parts (buttons, footer) were repeated across all nine files. The new site fixed that with one shared set of brand tokens and components.
 
-## Running it locally
+### Running it locally
 
-No build step, so any static file server works. From the `site/` folder:
+There's no build step, so any static file server works. From the `site/` folder:
 
 ```bash
 cd site
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000` in a browser. (Opening the HTML files directly by double-clicking also works for most pages, but a local server is closer to how it behaves once deployed, especially for the clean URLs.)
+Then open `http://localhost:8000` in a browser. Opening the HTML files directly also works for most pages, but a local server behaves closer to the live site, especially for clean URLs.
 
-## Deployment
+### Deployment
 
-Hosted on Exonhost (existing cPanel plan), with Cloudflare's free plan in front for CDN and analytics. Deployment is currently manual: upload the contents of `site/` to the hosting account's public directory for the growthseeded.com addon domain.
+It was hosted on Exonhost (a cPanel plan), with Cloudflare's free plan in front for caching and analytics. Deploys were manual: upload the contents of `site/` to the hosting account.
 
-## Page inventory
+### Page inventory
 
 | Page | Purpose |
 |---|---|
 | `index.html` | Homepage |
-| `is-this-for-you.html` | Persona-specific use cases |
-| `pricing.html` | Plans, interactive plan-size recommender |
-| `security.html` | How data isolation actually works |
-| `contact.html` | Contact form (mailto-based, no backend) |
+| `is-this-for-you.html` | Use cases for each kind of user |
+| `pricing.html` | Plans, with a tool that suggests a plan size |
+| `security.html` | How each account's data is kept separate |
+| `contact.html` | Contact form (mailto, no backend) |
 | `privacy.html` | Privacy policy |
 | `terms.html` | Terms of service |
 | `refund-policy.html` | Refund policy |
 | `404.html` | Not-found page |
 
-## Working on this together
+### Working habits
 
-This repo is also a shared learning project. A few habits worth keeping from day one:
+This repo was also where good habits started, and they carried into the new site and app:
 
-- **One feature or fix per branch**, not direct commits to `main`. Even solo, this builds the habit and makes the history readable.
-- **Commit messages describe what changed and why**, not just "update". e.g. `Fix broken pricing link in footer` rather than `fix`.
-- **Open a pull request even when working alone**, and actually read the diff before merging. That's the real skill being practiced here, not just the git commands.
+- **One feature or fix per branch**, never direct commits to `main`.
+- **Commit messages say what changed and why**, such as `Fix broken pricing link in footer`, not just `fix`.
+- **A pull request for every change, even working alone**, with the diff read before merging.
 
-## License
+### License
 
-Not currently licensed for reuse. All rights reserved.
+Not licensed for reuse. All rights reserved.
