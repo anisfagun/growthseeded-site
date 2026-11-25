@@ -1,14 +1,43 @@
-# GrowthSeeded: a SaaS product I built end to end
+# GrowthSeeded: a simple follow-up tracker for LinkedIn
 
-I'm a marketing strategist who builds software. This page shows my technical work through GrowthSeeded: the app, the website and how I run them in production.
+A SaaS product I built end to end: the app, the website and how they run in production.
+
+I'm a marketing strategist who builds software. This page shows my technical work through GrowthSeeded.
 
 This repo is the first version of the GrowthSeeded website, kept as an archive. The live site and the app have since been rebuilt on a modern stack, and that code is private for security reasons.
 
 ## What GrowthSeeded is
 
-**GrowthSeeded: a simple follow-up tracker for LinkedIn.**
-
 GrowthSeeded is a simple follow-up tracker for LinkedIn. Add the people you want to stay in touch with, and each day it tells you who to message, so you don't forget to follow up. No complex CRM, no automation. You send every message yourself, and it adds no risk to your LinkedIn account.
+
+- **Never forget a follow-up:** today's list shows who to message and what's next.
+- **Simple, not a complex CRM:** add a name and a reason, and you're working in a minute.
+- **No account risk:** no AI automation, no LinkedIn integration. You send every message yourself.
+
+### The problem it solves
+
+Most of LinkedIn is people who never replied, not people who said no. You connect, send one message, get busy, and three weeks later you can't remember who you talked to or what you said. The follow-up that would have worked never gets sent.
+
+### How it works
+
+1. **Add a person.** A name and why they matter is enough. You can paste their LinkedIn profile text to fill in the rest.
+2. **Follow a few short steps.** Like a post, send a connection request, send a message once they accept, then set a follow-up date. Each step shows on your Today list when it's due.
+3. **Keep the conversation in one place.** Paste the LinkedIn chat, or log a message from WhatsApp, email or a call. GrowthSeeded shows whose turn it is and when you last wrote.
+4. **Follow up on time.** When a reply comes in, the person moves into a conversation. When it's not the right time, set a date to check in later, and GrowthSeeded brings them back when it comes around.
+
+A short daily email lists who to follow up with, so you don't have to open the app to know.
+
+### What it looks like in real life
+
+- **Looking for a job.** You meet a hiring manager on a webinar and connect. Two weeks later, Today reminds you to check in, with your last message right there.
+- **Raising money.** An investor says "come back when you have revenue." You set a follow-up for March and stop carrying it in your head.
+- **Selling.** A prospect wasn't ready in spring. In autumn, GrowthSeeded tells you it's time to check in, and you know exactly where you left off.
+- **Hiring.** A senior engineer passed last quarter. This quarter, you message them again at the right moment, with the full history in front of you.
+- **Building a network.** You stay in touch with people before you need something, which is the only kind of networking that works.
+
+### What it doesn't do
+
+GrowthSeeded never sends anything for you, never logs into LinkedIn and never scrapes it. On paid plans, aiWrite can draft a comment or a message from the person's details and your conversation so far. You edit it, and you send it yourself.
 
 Live at [growthseeded.com](https://growthseeded.com), with free sign-up at [app.growthseeded.com](https://app.growthseeded.com).
 
